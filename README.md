@@ -1,2 +1,2 @@
-# tuvoto_api
-tuvoto_api
+# academy_api
+academy_api
