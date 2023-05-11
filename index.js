@@ -23,18 +23,13 @@ const adminRoutes = require('./routes/admin');
 app.use('/tuvoto', adminRoutes);
 
 // Lee los archivos del certificado y la clave privada
-const key = fs.readFileSync(path.join(__dirname, '..', '\\\apiCandidatos\\sslDesarrollo', 'key.pem'));
-const cert = fs.readFileSync(path.join(__dirname, '..', '\\\apiCandidatos\\sslDesarrollo', 'cert.pem'));
+const key = fs.readFileSync('/tuvoto_pro/tuvoto_api/sslDesarrollo/key.pem');
+const cert = fs.readFileSync('/tuvoto_pro/tuvoto_api/sslDesarrollo/cert.pem');
 
 const credentials = { key: key, cert: cert, passphrase: '123456' };
 
 const httpsServer = https.createServer(credentials, app);
-
-
-// Inicia el servidor HTTPS en el puerto 3000
-httpsServer.listen(3000, () => {
-  console.log("Servidor HTTPS iniciado en el puerto 3000");
-});
+httpsServer.listen('443','172.26.0.101');
 // Inicia el servidor
 // const port = process.env.PORT || 3000;
 // app.listen(port, () => {
