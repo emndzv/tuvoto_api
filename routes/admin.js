@@ -71,6 +71,7 @@ router.get("/perfil", authenticateJWT, async (req, res) => {
 // Ejemplo de ruta protegida para administradores
 router.get("/partidos", authenticateJWT, async (req, res) => {
   try {
+      const userId = req.user.id;
 
     const query = "select * from groupings";
     const result = await pool.query(query, [userId]);
