@@ -91,7 +91,7 @@ router.get("/partidos", authenticateJWT, async (req, res) => {
 // Ejemplo de ruta protegida para administradores
 router.get("/candidatos", authenticateJWT, async (req, res) => {
   try {
-    const query = "select * from candidates";
+    const query = "select * from candidates a inner join groupings g on a.id_group=g.id_group inner join locations l on l.id_location =a.id_location ";
     const result = await pool.query(query);
 
     if (result.rowCount === 0) {
