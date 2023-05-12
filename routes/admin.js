@@ -73,13 +73,13 @@ router.get("/partidos", authenticateJWT, async (req, res) => {
   try {
 
     const query = "select * from groupings";
-    const result = await pool.query(query, [userId]);
+    const result = await pool.query(query);
 
     if (result.rowCount === 0) {
       return res.status(404).json({ error: "Administrador no encontrado" });
     }
 
-    const user = result.rows[0];
+    const user = result;
     res.json(user);
   } catch (err) {
     console.error(err);
