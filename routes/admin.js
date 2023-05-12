@@ -67,6 +67,8 @@ router.get("/perfil", authenticateJWT, async (req, res) => {
     res.status(500).json({ error: "Error interno del servidor" });
   }
 });
+
+
 // Ejemplo de ruta protegida para administradores
 router.get("/partidos", authenticateJWT, async (req, res) => {
   try {
@@ -84,5 +86,25 @@ router.get("/partidos", authenticateJWT, async (req, res) => {
     res.status(500).json({ error: "Error interno del servidor" });
   }
 });
+
+
+// Ejemplo de ruta protegida para administradores
+router.get("/candidatos", authenticateJWT, async (req, res) => {
+  try {
+    const query = "select * from candidates";
+    const result = await pool.query(query);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: "Administrador no encontrado" });
+    }
+
+    const user = result.rows;
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+});
+
 
 module.exports = router;
