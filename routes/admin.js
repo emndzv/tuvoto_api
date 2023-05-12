@@ -67,11 +67,9 @@ router.get("/perfil", authenticateJWT, async (req, res) => {
     res.status(500).json({ error: "Error interno del servidor" });
   }
 });
-
 // Ejemplo de ruta protegida para administradores
 router.get("/partidos", authenticateJWT, async (req, res) => {
   try {
-
     const query = "select * from groupings";
     const result = await pool.query(query);
 
@@ -79,7 +77,7 @@ router.get("/partidos", authenticateJWT, async (req, res) => {
       return res.status(404).json({ error: "Administrador no encontrado" });
     }
 
-    const user = result;
+    const user = result.rows;
     res.json(user);
   } catch (err) {
     console.error(err);
